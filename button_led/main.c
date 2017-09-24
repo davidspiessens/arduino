@@ -1,10 +1,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-typedef int bool;
-#define true 1
-#define false 0
-
 int main (void)
 {
 	// pin 0 = input
@@ -18,14 +14,14 @@ int main (void)
 	PORTB |= _BV(5);
 
 	// previous button state
-	bool btn = false;
+	bool btn = 0;
 
 	while(1) { 	
 		// check if the button is pressed
 		// remember: it's a pullup resistor, the not-pressed state of the button is high
 		if (PINB & _BV(0)) {
 			// not pressed, set previous button state to false
-			btn = false;
+			btn = 0;
 		} else {
 			// pressed, check if the state changed
 			if (!btn) {
@@ -37,7 +33,7 @@ int main (void)
 					PORTB |= _BV(5);
 				}
 				// set previous button state to true
-				btn = true;
+				btn = 1;
 			}
 		}
 
