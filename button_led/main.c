@@ -8,14 +8,14 @@ typedef int bool;
 int main (void)
 {
 	// pin 0 = input
-	DDRB &= ~_BV(DDB0);
+	DDRB &= ~_BV(0);
 	// enable pullup resistor for pin 1
-	PORTB |= _BV(PORTB0);
+	PORTB |= _BV(0);
 	// pin 5 = output
-	DDRB |= _BV(DDB5);
+	DDRB |= _BV(5);
 	
 	// turn on led
-	PORTB |= _BV(PORTB5);
+	PORTB |= _BV(5);
 
 	// previous button state
 	bool btn = false;
@@ -23,18 +23,18 @@ int main (void)
 	while(1) { 	
 		// check if the button is pressed
 		// remember: it's a pullup resistor, the not-pressed state of the button is high
-		if (PINB & _BV(PINB0)) {
+		if (PINB & _BV(0)) {
 			// not pressed, set previous button state to false
 			btn = false;
 		} else {
 			// pressed, check if the state changed
 			if (!btn) {
-				if (PORTB & _BV(PORTB5)) {
+				if (PORTB & _BV(5)) {
 					// turn off led
-					PORTB &= ~_BV(PORTB5);
+					PORTB &= ~_BV(5);
 				} else {
 					// turn on led
-					PORTB |= _BV(PORTB5);
+					PORTB |= _BV(5);
 				}
 				// set previous button state to true
 				btn = true;
@@ -44,4 +44,6 @@ int main (void)
 		// avoid debounce from the button
 		_delay_ms(50);
 	}
+
+	return 0;
 }

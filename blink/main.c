@@ -7,16 +7,18 @@
 int main (void)
 {
 	// pin 5 = output
-	DDRB |= _BV(DDB5);
+	DDRB |= _BV(5);
 
 	while(1) {
 		// turn on led
-		PORTB |= _BV(PORTB5);
+		PORTB |= _BV(5);
 		// wait 1 second
 		_delay_ms(BLINK_DELAY_MS);
 		// turn off led
-		PORTB &= ~_BV(PORTB5);
+		PORTB &= ~_BV(5);
 		// wait 1 second
 		_delay_ms(BLINK_DELAY_MS);
 	}
+
+	return 0;
 }
